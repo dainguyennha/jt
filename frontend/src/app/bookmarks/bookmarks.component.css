@@ -1,0 +1,46 @@
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+div.bookmarks table tr {
+  margin-bottom: 2px;
+  cursor: pointer;
+  transition: background-color 250ms ease-in-out;
+}
+
+div.bookmarks table tr:hover {
+  background-color: rgb(161, 182, 206);
+}
+
+div.bookmarks td:first-child {
+  padding: 20px;
+  font-weight: 500;
+}
+
+div.bookmarks div.item-img {
+  padding: 10px 0px;
+}
+
+div.bookmarks div.item-img img {
+  width: 200px;
+}
+
+div.bookmarks .condensed-only {
+  display: none;
+}
+
+@media (max-width: 840px) {
+  div.bookmarks td:not(:first-child) {
+    display: none;
+  }
+  div.bookmarks th:not(:first-child) {
+    display: none;
+  }
+  div.bookmarks .condensed-only {
+    display: block;
+  }
+}

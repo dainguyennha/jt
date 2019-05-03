@@ -1,0 +1,15 @@
+div.home {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+div.home div {
+  text-align: justify;
+  padding: 0 20px;
+}
+
+@media (max-width: 720px) {
+  div.home {
+    grid-template-columns: 1fr;
+  }
+}

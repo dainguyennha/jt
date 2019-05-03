@@ -1,0 +1,23 @@
+<div class="video" [hidden]="!vada">
+  <h1 class="title" *ngIf="video">{{video.title}}</h1>
+
+  <div class="content">
+    <div class="video-wrapper">
+      <video onplay="my.namespace.onPlay()" #videoContainer id="videojs-overlay-player"
+        class="video-js vjs-default-skin vjs-big-play-centered" controls>
+        <source *ngIf="video" src="{{video.source}}" type='video/mp4'>
+      </video>
+      <app-sidebar #sideBarComponent></app-sidebar>
+      <mat-toolbar>
+        <span>My Application</span>
+      </mat-toolbar>
+    </div>
+    <div class="rois">
+      <mat-list>
+        <mat-list-item *ngFor="let item of items">
+          <b>{{item.title}}</b>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>

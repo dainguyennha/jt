@@ -1,0 +1,36 @@
+<div class="bookmarks">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="item">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Bookmark </th>
+      <td mat-cell *matCellDef="let element"> {{element.item.title}}
+        <div class="item-img">
+          <img src="{{element.thumbnail}}" />
+        </div>
+        <div class="condensed-only">
+          <h5>{{element.video.title}} @ {{element.location}}</h5>
+          <h6>Created @ {{element.created}}</h6>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="video">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Video </th>
+      <td mat-cell *matCellDef="let element"> {{element.video.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created </th>
+      <td mat-cell *matCellDef="let element"> {{element.created}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr routerLink="/video/{{row.video.id}}" [queryParams]="{ t: row.location}" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>

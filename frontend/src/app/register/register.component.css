@@ -1,0 +1,69 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  padding: 15px;
+}
+
+.register div.logo {
+  width: 150px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.register div.slogan {
+  margin-bottom: 20px;
+  font-weight: 100;
+  font-size: 1.3em;
+}
+
+.register button {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+
+.register form {
+  width: 100%;
+}
+
+.register mat-form-field {
+  width: 100%;
+}
+
+.register #server-error-msg {
+  border: 1px solid #f44336;
+  color: #f44336;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.register #server-success-msg {
+    border: 1px solid #5dcf00;
+    color: #5dcf00;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+.register #btn-login-container {
+  text-align: left;
+  font-size: 80%;
+  font-weight: 500;
+}
+
+.register #btn-login {
+  cursor: pointer;
+  color: dodgerblue;
+}
+
+@media (min-width: 720px) {
+  .register {
+    max-width: 300px;
+  }
+}

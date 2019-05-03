@@ -1,0 +1,27 @@
+<div *ngIf="visibility" class="sidebar">
+  <div>
+    <h2 class="title">{{ this.item.title }}</h2>
+    <h4 class="subtitle">{{ this.item.subtitle }}</h4>
+    <div class="description">{{ this.item.description }}</div>
+    <div class="action-row">
+      <button mat-raised-button color="primary" (click)="addBookmark()">Bookmark</button>
+      <button mat-raised-button color="primary">More</button>
+    </div>
+    <div class="social-row">
+      <div>
+        <i shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color" class="fa fa-facebook"></i>
+      </div>
+      <div>
+        <i shareButton="google" [style.backgroundColor]="share.prop.google.color" class="fa fa-google-plus"></i>
+      </div>
+      <div>
+        <i shareButton="email" title="Heey man" description="Hello what is up guys" [style.backgroundColor]="share.prop.facebook.color"
+          class="fa fa-envelope-o"></i>
+      </div>
+      <div>
+          <i shareButton="email" title="Heey man" description="Hello what is up guys" [style.backgroundColor]="share.prop.facebook.color"
+            class="fa fa-envelope-o"></i>
+        </div>
+    </div>
+  </div>
+</div>

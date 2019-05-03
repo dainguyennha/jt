@@ -1,0 +1,76 @@
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.mat-menu-item {
+  line-height: 100%;
+  height: auto;
+  padding: 0px;
+  text-align: center;
+}
+
+div.view-container {
+  padding: 30px 15px;
+  margin: 0 auto;
+  max-width: 940px;
+  min-height: calc(100vh - 399px)
+}
+
+mat-toolbar {
+  background: #000;
+  color: #cdcdcd;
+  height: 60px;
+}
+
+span.role {
+  background-color: #343434;
+  border-radius: 3px;
+  color: white;
+  padding: 0.5em 1em;
+  font-size: 0.7em;
+  margin-left: 1em;
+}
+
+div.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: -25px;
+}
+
+footer {
+  width: 100%;
+  background-color: #232323;
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 300;
+  line-height: 150%;
+}
+
+footer>div:first-child {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 15px;
+}
+
+footer>div:first-child>div {
+  padding: 30px;
+}
+
+footer>div:first-child>div>div.content {
+  font-size: 11px;
+  text-align: justify;
+}
+
+footer>div:nth-child(2) {
+  text-align: center;
+  padding: 10px;
+  background-color: #343434;
+}
+
+@media (max-width: 960px) {
+  footer>div:first-child {
+    grid-template-columns: 1fr;
+  }
+}

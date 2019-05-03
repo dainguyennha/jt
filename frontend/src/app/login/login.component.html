@@ -1,0 +1,37 @@
+<div class="login-container">
+  <div class="login">
+    <div class="logo">
+      <img src="../assets/img/logo.png" />
+    </div>
+    <div class="slogan">Sign in to Joytu.be</div>
+    <button (click)="loginFB()" mat-raised-button color="primary">Log in with Facebook</button>
+    <br/>
+    <button (click)="loginGoogle()" mat-raised-button color="warn">Log in with Google</button>
+    <hr/>
+    <form class="login-form">
+      <mat-form-field>
+        <input matInput placeholder="Email" #emailInput [formControl]="emailFormControl" [errorStateMatcher]="errorStateMatcher">
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" #passwordInput placeholder="Password" [formControl]="passwordFormControl" [errorStateMatcher]="errorStateMatcher">
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Password is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-error id="server-error-msg" *ngIf="errorMessage!=''">{{errorMessage}}</mat-error>
+    </form>
+    <button (click)="loginEmail({'email':emailInput.value,'password':passwordInput.value})" mat-raised-button color="basic">Log in with Email</button>
+    <div id="btn-register-container">New to Joytu.be?
+      <span id="btn-register" routerLink="/register">Create an account</span>
+    </div>
+  </div>
+</div>

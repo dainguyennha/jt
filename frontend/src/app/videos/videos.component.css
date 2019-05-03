@@ -1,0 +1,27 @@
+div.videos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+}
+
+div.videos .duration {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: inline-block;
+    text-align: right;
+    font-weight: 900;
+}
+
+div.videos mat-card-subtitle {
+    position: relative;
+}
+
+@media (max-width: 720px) {
+    div.videos {
+        grid-template-columns: 1fr;
+    }
+}
