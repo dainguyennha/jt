@@ -177,7 +177,7 @@ export class AuthService {
   }
 
   updateCurrentUser() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       var user = firebase.auth().currentUser;
 
       this.db.collection("users").doc(user.uid).set({
