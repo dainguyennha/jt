@@ -6,12 +6,12 @@ export const environment = {
   production: false,
   apiURL: 'http://localhost:5000',
   firebase: {
-    apiKey: "AIzaSyBb9qCE6828LLwV_lW8lOZlTAGBCi_RpXU",
-    authDomain: "joytube-e15c1.firebaseapp.com",
-    databaseURL: "https://joytube-e15c1.firebaseio.com",
-    projectId: "joytube-e15c1",
-    storageBucket: "joytube-e15c1.appspot.com",
-    messagingSenderId: "336054135479"
+    apiKey: "AIzaSyCgsLG5a096GfcdafQn1QkiCYk_0Wd44FM",
+    authDomain: "demoauthentication-6757f.firebaseapp.com",
+    databaseURL: "https://demoauthentication-6757f.firebaseio.com",
+    projectId: "demoauthentication-6757f",
+    storageBucket: "demoauthentication-6757f.appspot.com",
+    messagingSenderId: "851528908574"
   }
 };
 
