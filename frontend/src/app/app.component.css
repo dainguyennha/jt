@@ -12,7 +12,7 @@
 div.view-container {
   padding: 30px 15px;
   margin: 0 auto;
-  max-width: 940px;
+  max-width: 90%;
   min-height: calc(100vh - 399px)
 }
 
