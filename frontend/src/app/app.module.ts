@@ -51,6 +51,7 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireStorageModule } from "angularfire2/storage";
 import { ItemsComponent } from './items/items.component';
 import { ErrorComponent } from './error/error.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const routes: Routes = [
   {
@@ -130,6 +131,7 @@ const routes: Routes = [
     MatSortModule,
     NoopAnimationsModule,
     ReactiveFormsModule,
+    DragDropModule,
     RouterModule.forRoot(routes),
     ShareModule.forRoot({
       options: {
