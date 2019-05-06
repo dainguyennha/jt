@@ -54,3 +54,37 @@ div.video div.rois {
     height: 400px;
   }
 }
+
+ .circle {
+  position: absolute;
+  z-index: 10;
+  background: #cc3300;
+  top: 50%;
+ 
+  left: 50%;
+  
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  
+}
+
+.circle:hover {
+  cursor: pointer;
+  background: #cc3300;
+}
+
+
+
+.testvideo{
+  position: relative;
+  width: 500px;
+  height: 300px;
+
+}
+
+.video-header {
+  position: absolute;
+  height: 20px;
+  z-index: 10;
+}

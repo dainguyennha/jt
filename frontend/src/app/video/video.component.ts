@@ -32,6 +32,9 @@ export class VideoComponent implements OnInit, AfterViewInit {
   rois: ROI[];
   items: Item[];
   vada: Boolean = false;
+  isPause : boolean = false;
+  headerDisplay: boolean = false;
+  isTagDisplay: boolean = false;
   @ViewChild("videoContainer") videoContainer: ElementRef;
   @ViewChild("sideBarComponent") sideBarComponent: SidebarComponent;
 
@@ -79,6 +82,16 @@ export class VideoComponent implements OnInit, AfterViewInit {
         }
 
         let player = videojs(this.videoContainer.nativeElement);
+        player.on("pause", () => {
+          this.isPause = true;
+          this.toggleHeader();
+        });
+        player.on("play", () => { 
+          if(this.isPause) {
+            this.toggleHeader();
+            this.isPause = false;
+          }
+        });
         player.overlay({
           content: "",
           debug: false,
@@ -110,6 +123,18 @@ export class VideoComponent implements OnInit, AfterViewInit {
   }
   onPlayPrivate() {
     this.sideBarComponent.hide();
+  }
+
+  onDragEnded(event) {
+    console.log(event.source.dropped);
+  }
+
+  toggleHeader() {
+    this.headerDisplay = !this.headerDisplay;
+  }
+
+  toggleTag() {
+    this.isTagDisplay = !this.isTagDisplay;
   }
 
   ngAfterViewInit() {}
