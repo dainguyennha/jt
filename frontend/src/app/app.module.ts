@@ -52,6 +52,7 @@ import { AngularFireStorageModule } from "angularfire2/storage";
 import { ItemsComponent } from './items/items.component';
 import { ErrorComponent } from './error/error.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SidebarAddTagComponent } from './sidebar-add-tag/sidebar-add-tag.component';
 
 const routes: Routes = [
   {
@@ -104,7 +105,8 @@ const routes: Routes = [
     SidebarComponent,
     VideosComponent,
     VideoComponent,
-    UnverifiedComponent
+    UnverifiedComponent,
+    SidebarAddTagComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
