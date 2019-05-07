@@ -4,26 +4,19 @@
   <div class="content">
     <div class="video-wrapper">
 
-      <div class="testvideo">
         <div *ngIf="headerDisplay" class="video-header">
-          <button (click)="toggleTag()">Hien tag</button>
-          <button>Set tag</button>
+          <button><i class="fa fa-share"></i></button>
+          <button (click)="toggleTag()"><i class="fa fa-comments"></i></button>
         </div>
 
         <video onplay="my.namespace.onPlay()" #videoContainer id="videojs-overlay-player"
           class="video-js vjs-default-skin vjs-big-play-centered" controls>
           <source *ngIf="video" src="{{video.source}}" type='video/mp4'>
         </video>
-        <div *ngIf="isTagDisplay" class="circle" cdkDrag cdkDragBoundary=".testvideo"></div>
-      </div>
-
-
-
+        <div *ngIf="isTagDisplay" class="circle" cdkDrag cdkDragBoundary=".video-wrapper"></div>
 
       <app-sidebar #sideBarComponent></app-sidebar>
-      <mat-toolbar>
-        <span>My Application</span>
-      </mat-toolbar>
+
     </div>
     <div class="rois">
       <mat-list>

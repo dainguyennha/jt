@@ -32,7 +32,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
   rois: ROI[];
   items: Item[];
   vada: Boolean = false;
-  isPause : boolean = false;
+  isPause: boolean = false;
   headerDisplay: boolean = false;
   isTagDisplay: boolean = false;
   @ViewChild("videoContainer") videoContainer: ElementRef;
@@ -42,7 +42,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private videoService: VideoService,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   ngOnInit() {
     window.my = window.my || {};
@@ -52,7 +52,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
 
     this.route.queryParams.filter(params => params.t).subscribe(params => {
       this.t = params.t;
-      this.videoContainer.nativeElement.currentTime = this.t;      
+      this.videoContainer.nativeElement.currentTime = this.t;
     });
 
     this.route.params.subscribe(params => {
@@ -86,9 +86,12 @@ export class VideoComponent implements OnInit, AfterViewInit {
           this.isPause = true;
           this.toggleHeader();
         });
-        player.on("play", () => { 
-          if(this.isPause) {
+        player.on("play", () => {
+          if (this.isPause) {
             this.toggleHeader();
+            if (this.isTagDisplay) {
+              this.toggleTag();
+            }
             this.isPause = false;
           }
         });
@@ -137,5 +140,5 @@ export class VideoComponent implements OnInit, AfterViewInit {
     this.isTagDisplay = !this.isTagDisplay;
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 }
