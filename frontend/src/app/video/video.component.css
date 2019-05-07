@@ -33,6 +33,16 @@ div.video div.rois mat-list {
   left: 0;
   right: 0;
 }
+.video-header button{
+  font-size: 20px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  width: 30px;
+  margin: 8px;
+  height: 30px;
+}
 
 div.video div.rois mat-list-item {
   background-color: #bcbcbc;
