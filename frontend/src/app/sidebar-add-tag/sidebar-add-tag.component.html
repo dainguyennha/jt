@@ -1,0 +1,11 @@
+<div  class="sidebar" *ngIf="showAddSideBar">
+    <div>
+      <input type="text" placeholder="Title">
+      <textarea name="des" id="des" cols="30" rows="10" placeholder="Description"></textarea>
+      <div class="action-row">
+        <button mat-raised-button color="primary" (click)="addBookmark()">Ok</button>
+        <button mat-raised-button color="warn" (click)="cancelAddBookmark()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  

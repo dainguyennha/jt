@@ -2,12 +2,14 @@
   <h1 class="title" *ngIf="video">{{video.title}}</h1>
 
   <div class="content">
-    <div class="video-wrapper">
+    <div class="video-wrapper" #videoWrapper>
 
         <div *ngIf="headerDisplay" class="video-header">
           <button><i class="fa fa-share"></i></button>
           <button (click)="toggleTag()"><i class="fa fa-comments"></i></button>
+          <button class="btn-select" *ngIf="toggleSelect" (click)="showSideBarAdd()">Select</button>
         </div>
+
 
         <video onplay="my.namespace.onPlay()" #videoContainer id="videojs-overlay-player"
           class="video-js vjs-default-skin vjs-big-play-centered" controls>
@@ -16,7 +18,7 @@
         <div *ngIf="isTagDisplay" class="circle" cdkDrag cdkDragBoundary=".video-wrapper"></div>
 
       <app-sidebar #sideBarComponent></app-sidebar>
-
+      <app-sidebar-add-tag *ngIf="toggleSideBarAdd" [(showAddSideBar)]="toggleSideBarAdd"  [widthVideo]="widthVideo" [heightVideo]="heightVideo"  [time]="time" ></app-sidebar-add-tag>
     </div>
     <div class="rois">
       <mat-list>

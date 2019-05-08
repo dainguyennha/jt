@@ -33,6 +33,7 @@ div.video div.rois mat-list {
   left: 0;
   right: 0;
 }
+
 .video-header button{
   font-size: 20px;
   background: black;
@@ -42,6 +43,10 @@ div.video div.rois mat-list {
   width: 30px;
   margin: 8px;
   height: 30px;
+}
+
+.btn-select{
+  width: fit-content !important;
 }
 
 div.video div.rois mat-list-item {
@@ -70,13 +75,10 @@ div.video div.rois {
   z-index: 10;
   background: #cc3300;
   top: 50%;
- 
   left: 50%;
-  
   border: none;
   border-radius: 50%;
   padding: 10px;
-  
 }
 
 .circle:hover {
@@ -90,7 +92,6 @@ div.video div.rois {
   position: relative;
   width: 500px;
   height: 300px;
-
 }
 
 .video-header {
@@ -98,3 +99,5 @@ div.video div.rois {
   height: 20px;
   z-index: 10;
 }
+
+
