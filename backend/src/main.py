@@ -120,7 +120,7 @@ def get_videos():
 
 @app.route('/bookmark', methods=['POST'])
 @app.route('/bookmark/<string:id>', methods=['GET'])
-@requires_auth
+# @requires_auth
 def bookmark(id=None):
     if request.method == 'POST':
         mongo.db.bookmarks.insert({
