@@ -14,7 +14,7 @@ import { AuthService } from "../services/auth.service";
 
 @Injectable()
 export class BookmarkService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   private static _handleError(err: HttpErrorResponse | any) {
     return Observable.throw(
@@ -43,6 +43,12 @@ export class BookmarkService {
     formData.append("created", bookmark.created.toLocaleString());
     return this.http
       .post(`${environment.apiURL}/bookmark`, formData)
+      .catch(BookmarkService._handleError);
+  }
+
+  deleteBookmark(id:string): Observable<any> {
+    return this.http
+      .get(`${environment.apiURL}/delete-bookmark/` + id)
       .catch(BookmarkService._handleError);
   }
 }

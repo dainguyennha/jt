@@ -2,16 +2,14 @@ import { Injectable } from "@angular/core";
 import {
   HttpClient,
   HttpErrorResponse,
-  HttpHeaders
 } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/catch";
 import { environment } from '../../environments/environment';
-import { ROI } from "../models/roi.model";
-import { Item } from "../models/item.model";
 
 @Injectable()
 export class VideoService {
+
   constructor(private http: HttpClient) { }
 
   private static _handleError(err: HttpErrorResponse | any) {
@@ -36,13 +34,15 @@ export class VideoService {
       .catch(VideoService._handleError);
   }
 
-  addRoi(roi){
-    console.log(roi)
-  }
-  addObjectItems(item:Item){
-    console.log(item)
+  delRoiItem(id):Observable<any>{
+    return this.http.get(`${environment.apiURL}/delete-roi-item/`+id)
   }
 
+  addRoiItem(formdata): Observable<any> {
+    return this.http
+      .post(`${environment.apiURL}/item-roi`, formdata)
+      .catch(VideoService._handleError);
+  }
 
   getItems(id): Observable<any> {
     return this.http
