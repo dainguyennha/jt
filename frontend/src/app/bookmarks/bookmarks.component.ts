@@ -11,18 +11,23 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./bookmarks.component.css"]
 })
 export class BookmarksComponent implements OnInit, OnChanges {
-  displayedColumns = ["item", "video", "location", "created"];
+
+  displayedColumns = ["item", "video", "location", "created", "tool"];
+  displayedColumn = ["item", "video", "location", "created"];
   bookmarks: Bookmark[];
   dataSource;
+
   @ViewChild(MatSort) sort: MatSort;
   constructor(
     private bookmarkService: BookmarkService,
     private authService: AuthService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
+
   ngOnChanges() {
-    this.route.data.subscribe(routeData => {});
+    this.route.data.subscribe(routeData => { });
   }
+
   ngOnInit() {
     this.bookmarkService
       .getBookmarks(AuthService.user.id)
@@ -31,5 +36,14 @@ export class BookmarksComponent implements OnInit, OnChanges {
         this.dataSource = new MatTableDataSource(this.bookmarks);
         this.dataSource.sort = this.sort;
       }, console.error);
+  }
+
+  delete_bookmark(data) {
+    this.bookmarkService.deleteBookmark(data.video.id + "-" + data.item.id + "-" + this.authService.getUser().id)
+      .subscribe(del => {
+        let index = this.bookmarks.findIndex(bm => bm.id === del)
+        this.bookmarks.splice(index, 1)
+        this.dataSource = new MatTableDataSource(this.bookmarks);
+      })
   }
 }

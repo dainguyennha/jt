@@ -5,7 +5,6 @@ import {
   ElementRef,
   ViewChild,
   NgZone,
-  OnChanges,
   HostListener
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
@@ -26,7 +25,7 @@ declare var videojs: any;
   templateUrl: "./video.component.html",
   styleUrls: ["./video.component.css"]
 })
-export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
+export class VideoComponent implements OnInit, AfterViewInit {
   id;
   t;
   selectedItem;
@@ -34,6 +33,7 @@ export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
   widthVideo;
   heightVideo;
   rois: ROI[];
+
   items: Item[];
   time;
   vada: Boolean = false;
@@ -42,6 +42,7 @@ export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
   isTagDisplay: boolean = false;
   toggleSelect: boolean = false;
   toggleSideBarAdd: boolean = false;
+
   @ViewChild("videoContainer") videoContainer: ElementRef;
   @ViewChild("sideBarComponent") sideBarComponent: SidebarComponent;
   @ViewChild('videoWrapper') videoWrapper: ElementRef
@@ -50,12 +51,11 @@ export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
     this.heightVideo = this.videoWrapper.nativeElement.offsetHeight
   }
 
-
   constructor(
     private route: ActivatedRoute,
     private videoService: VideoService,
     private ngZone: NgZone
-  ) { }
+  ) {}
 
   ngOnInit() {
     window.my = window.my || {};
@@ -100,6 +100,7 @@ export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
           this.toggleHeader();
           this.time = player.currentTime();
         });
+
         player.on("play", () => {
           if (this.isPause) {
             this.toggleHeader();
@@ -121,14 +122,17 @@ export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
       }, 2000);
     });
   }
+
   ngOnDestroy() {
     window.my.namespace.onShow = null;
     window.my.namespace.onPlay = null;
   }
+
   onShow(id) {
     this.selectedItem = this.items.find(item => item.id == id);
     this.ngZone.run(() => { this.onShowPrivate(); this.toggleSideBarAdd = false });
   }
+
   onShowPrivate() {
     this.videoContainer.nativeElement.pause();
     this.sideBarComponent.show(
@@ -137,9 +141,11 @@ export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
       this.videoContainer.nativeElement.currentTime
     );
   }
+
   onPlay() {
     this.ngZone.run(() => this.onPlayPrivate());
   }
+
   onPlayPrivate() {
     this.sideBarComponent.hide();
     this.toggleSideBarAdd = false;
@@ -155,12 +161,9 @@ export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
 
   toggleTag() {
     this.isTagDisplay = !this.isTagDisplay;
-    this.toggleSelect = true;
+    this.toggleSelect = !this.toggleSelect;
     this.widthVideo = this.videoWrapper.nativeElement.offsetWidth
     this.heightVideo = this.videoWrapper.nativeElement.offsetHeight
-  }
-  ngOnChanges() {
-
   }
 
   showSideBarAdd() {
@@ -168,4 +171,18 @@ export class VideoComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() { }
+
+  getAddedRoiItem(value) {
+    this.rois.push(value['added_roi'])
+    this.items.push(value['added_item'])
+  }
+
+  deleteItem(id) {
+    this.videoService.delRoiItem(id).subscribe(x => {
+      let delRoiIndex = this.rois.findIndex(roi => roi.id === id)
+      this.rois.splice(delRoiIndex, 1)
+      let delItemIndex = this.items.findIndex(item => item.id === id)
+      this.items.splice(delItemIndex, 1)
+    })
+  }
 }

@@ -1,5 +1,6 @@
 export class Bookmark {
   constructor(
+    public id :string,
     public video: {
       id: string;
       title: string;

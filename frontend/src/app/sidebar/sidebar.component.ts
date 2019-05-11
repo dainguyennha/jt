@@ -24,9 +24,9 @@ export class SidebarComponent implements OnInit {
     private authService: AuthService,
     public share: ShareButtons,
     public snackBar: MatSnackBar
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   show(item, video, location) {
     this.item = item;
@@ -39,7 +39,6 @@ export class SidebarComponent implements OnInit {
       { property: "og:description", content: item.description },
       { property: "og:image", content: item.thumbnail }
     ]);
-
     this.visibility = true;
   }
 
@@ -47,6 +46,7 @@ export class SidebarComponent implements OnInit {
     this.bookmarkService
       .addBookmark(
         new Bookmark(
+          '',
           {
             id: this.video.id,
             title: this.video.title

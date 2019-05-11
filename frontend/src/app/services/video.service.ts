@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import {
   HttpClient,
   HttpErrorResponse,
-  HttpHeaders
 } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/catch";
@@ -10,6 +9,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class VideoService {
+
   constructor(private http: HttpClient) { }
 
   private static _handleError(err: HttpErrorResponse | any) {
@@ -31,6 +31,16 @@ export class VideoService {
   getRois(id): Observable<any> {
     return this.http
       .get(`${environment.apiURL}/rois/` + id)
+      .catch(VideoService._handleError);
+  }
+
+  delRoiItem(id):Observable<any>{
+    return this.http.get(`${environment.apiURL}/delete-roi-item/`+id)
+  }
+
+  addRoiItem(formdata): Observable<any> {
+    return this.http
+      .post(`${environment.apiURL}/item-roi`, formdata)
       .catch(VideoService._handleError);
   }
 
