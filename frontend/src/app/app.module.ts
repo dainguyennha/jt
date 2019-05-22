@@ -35,10 +35,8 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
 import { ShareModule } from "@ngx-share/core";
 import { HomeComponent } from "./home/home.component";
 import { BookmarksComponent } from "./bookmarks/bookmarks.component";
-
 import { AuthService } from "./services/auth.service";
 import { UserResolver } from "./services/user.resolver";
-
 import { AngularFireModule } from "angularfire2";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireAuthModule } from "angularfire2/auth";

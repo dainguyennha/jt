@@ -5,7 +5,7 @@
   background-color: rgba(50, 50, 50, 0.5);
   color: white;
   z-index: 2147483647;
-  width: 30%;
+  width: 32%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -49,8 +49,30 @@ div.social-row > div > i {
   align-items: center;
   cursor: pointer;
 }
-@media (max-width: 740px) {
+@media (max-width: 650px) {
   div.action-row {
-    grid-template-columns: 1fr;
+    /* grid-template-columns: 1fr; */
+    margin-top: 9px;
+  }
+  div.social-row{
+    margin-top: 15px; 
+  }
+  mat-raised-button{
+    font-size: 0.8rem !important;
+    line-height: 26px !important;
+  }
+  .sidebar div.h4{
+    margin: 0 0 3px !important;
+  }
+  h4.subtitle{
+    margin: 0;
+  }
+  h2.title{
+    margin: 0 3px;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
+  button{
+    font-size: .8rem
   }
 }

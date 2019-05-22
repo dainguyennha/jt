@@ -15,6 +15,7 @@
       <app-sidebar #sideBarComponent (isShowProductWebsiteOutput)="detectClickMore($event)"></app-sidebar>
       <app-sidebar-add-tag (addedRoiItem)="getAddedRoiItem($event)" *ngIf="toggleSideBarAdd" [video]="video"
         [widthVideo]="widthVideo" [heightVideo]="heightVideo" [time]="time"></app-sidebar-add-tag>
+
     </div>
     <div class="rois">
       <mat-list>

@@ -69,7 +69,7 @@ def get_items(id):
         products.add(roi['product_id'])
         objects.add(roi['object_id'])
     # products.remove("")
-    objects.remove("")
+    # objects.remove("")
 
     processed = []
     extracted = list(mongo.db.products.find(
