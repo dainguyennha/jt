@@ -1,9 +1,18 @@
 <div class="home">
-  <div class="video-item">
-    <div class="video-wrap">
-        <video  controls>
+  <div class="video-item" #videoItem>
+    <div class="video-wrap" #videoWrapper>
+        <div *ngIf="headerDisplay" class="video-header">
+            <button><i class="fa fa-share"></i></button>
+            <button (click)="toggleTag()"><i class="fa fa-comments"></i></button>
+            <button class="btn-select" *ngIf="toggleSelect" (click)="showSideBarAdd()">Select</button>
+          </div>
+        <video class="video-js vjs-default-skin vjs-big-play-centered" onplay="my.namespace.onPlay()" #videoContainer controls>
           <source  src="{{source}}"  type='video/mp4'>
         </video>
+        <div *ngIf="isTagDisplay" class="circle" cdkDrag cdkDragBoundary=".video-wrap"></div>
+        <app-sidebar #sideBarComponent (isShowProductWebsiteOutput)="detectClickMore($event)"></app-sidebar>
+        <app-sidebar-add-tag  *ngIf="toggleSideBarAdd" [video]="video" [widthVideo]="widthVideo"
+          [heightVideo]="heightVideo" [time]="time"></app-sidebar-add-tag>
       </div>
     </div>
 
@@ -25,7 +34,6 @@
     <img src="../assets/img/home-dress.jpg" />
   </div>
 
-
   <div class="img-item2">
     <img src="../assets/img/home-bag.jpg" />
   </div>
@@ -45,7 +53,6 @@
     <img src="../assets/img/joyTu.be--MBS.jpg">
   </div>
 
-
   <div class="img-item4">
     <img src="../assets/img/home-brands.png" />
   </div>
@@ -56,5 +63,4 @@
       and inform our clients during their campaign to identify hotspots (e.g., their best traffic sources, their most engaged
       customer segments) and possible improvements. We do not aim for short-term gains, but focus on long-term partnerships.</h4>
   </div>
-
 </div>

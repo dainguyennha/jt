@@ -1,27 +1,25 @@
 <mat-toolbar class="mat-elevation-z10" *ngIf="router.url != '/login' && router.url != '/register'">
-  <button mat-button *ngIf="authService.getUser()&&authService.isAuthenticated()" routerLink="/bookmarks">Bookmarks</button>
-
+  <button mat-button routerLink="/">Home</button>
+  <button mat-button *ngIf="authService.getUser()&&authService.isAuthenticated()"
+    routerLink="/bookmarks">Bookmarks</button>
   <button mat-button routerLink="/videos">Videos</button>
   
   <button mat-button routerLink="/dashboard">Dashboard</button>
 
   <button mat-button *ngIf="authService.getUser()&&authService.isAuthenticated()&&authService.getUser().role=='admin'" routerLink="/items">Items</button>
 
+  <button mat-button *ngIf="authService.getUser()&&authService.isAuthenticated()&&authService.getUser().role=='admin'"
+    routerLink="/items">Items</button>
   <span class="fill-remaining-space"></span>
   <button mat-button routerLink="/login" *ngIf="authService.getUser()&&!authService.isAuthenticated()">Sign In</button>
-
-  <button *ngIf="authService.getUser()&&authService.isAuthenticated()" matBadgeOverlap="false" mat-button [matMenuTriggerFor]="menu">{{authService.getUser().getDisplayName()}}
+  <button *ngIf="authService.getUser()&&authService.isAuthenticated()" matBadgeOverlap="false" mat-button
+    [matMenuTriggerFor]="menu">{{authService.getUser().getDisplayName()}}
     <span class="role">{{authService.getUser().role}}</span>
   </button>
-
   <mat-menu class="mat-elevation-z10" #menu="matMenu">
-    <button mat-menu-item (click)="signOut()" *ngIf="authService.getUser()&&authService.isAuthenticated()">Sign Out</button>
+    <button mat-menu-item (click)="signOut()" *ngIf="authService.getUser()&&authService.isAuthenticated()">Sign
+      Out</button>
   </mat-menu>
-
-  <!-- <div class="logo" routerLink="/">
-    <img src="../assets/img/home-logo.png" />
-  </div> -->
-
 </mat-toolbar>
 
 <div class="view-container" [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
@@ -32,33 +30,36 @@
   <div>
     <div>
       <div class="title">ABOUT JOYTU.BE</div>
-      <hr/>
-      <div class="content">Our deep techs transform any normal video into interactive video. With joyTu.be, viewers can bookmark, share, comment,
+      <hr />
+      <div class="content">Our deep techs transform any normal video into interactive video. With joyTu.be, viewers can
+        bookmark, share, comment,
         ask questions about anything they like in your videos. We provide brands and agencies a refreshing and effective
         way to engage your customers, promote and sell your products/services via interactive videos.</div>
     </div>
     <div>
       <div class="title">BRANDS AND AGENCIES</div>
-      <hr/>
+      <hr />
       <div class="content">
         <ul>
           <li>For customized solutions, please email us</li>
 
           <li>Send your videos and product info via Dropbox, Google Drive, Box, or upload directly to joyTu.be</li>
 
-          <li>After processing, your interactive videos will be available at your joyTu.be page, and can be embeded (iframe)
+          <li>After processing, your interactive videos will be available at your joyTu.be page, and can be embeded
+            (iframe)
             to any website supporting our HTML5 interactive player</li>
         </ul>
       </div>
     </div>
     <div>
       <div class="title">CONTACT US</div>
-      <hr/>
+      <hr />
       <div class="content">
         <p>
           <i class="fa fa-envelope" aria-hidden="true"></i>we@joyTu.be</p>
         <p>
-          <i class="fa fa-map-marker" aria-hidden="true"></i>The Hangar @ iCube, National University of Singapore, 21 Heng Mui Keng Terrace, Singapore 119613</p>
+          <i class="fa fa-map-marker" aria-hidden="true"></i>The Hangar @ iCube, National University of Singapore, 21
+          Heng Mui Keng Terrace, Singapore 119613</p>
       </div>
     </div>
   </div>

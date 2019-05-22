@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { AuthService } from "./services/auth.service";
 import { Router, NavigationEnd } from "@angular/router";
 import { Location } from "@angular/common";
 import { fadeAnimation } from './transitions';
 import { filter } from 'rxjs/operators';
+
 
 declare var gtag
 
@@ -14,10 +15,16 @@ declare var gtag
   animations: [fadeAnimation]
 })
 export class AppComponent implements OnInit {
+  @HostListener('window:beforeunload', [ '$event' ])
+  beforeUnloadHander(event) {
+    // ...
+    console.log(event)
+  }
   constructor(
     public authService: AuthService,
     public location: Location,
     public router: Router,
+
   ) {
     const navEndEvent$ = router.events.pipe(
       filter(e => e instanceof NavigationEnd)
@@ -26,6 +33,7 @@ export class AppComponent implements OnInit {
       gtag('config', 'UA-140602899-1', { 'page_path': e.urlAfterRedirects });
     });
   }
+
 
   ngOnInit() { }
 

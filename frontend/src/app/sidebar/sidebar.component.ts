@@ -7,7 +7,8 @@ import { Bookmark } from "../models/bookmark.model";
 import { Video } from "../models/video.model";
 import { AuthService } from "../services/auth.service";
 
-import { MatSnackBar } from "@angular/material";
+import { MatSnackBar, MatSnackBarConfig } from "@angular/material";
+import { Router } from "@angular/router";
 declare let gtag
 @Component({
   selector: "app-sidebar",
@@ -27,7 +28,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private bookmarkService: BookmarkService,
     private authService: AuthService,
     public share: ShareButtons,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router:Router
   ) { }
 
   ngOnInit() { }
@@ -52,7 +54,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   }
 
+
   addBookmark() {
+    if(this.authService.isAuthenticated()){
+
     this.bookmarkService
       .addBookmark(
         new Bookmark(
@@ -72,8 +77,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe(res => {
-        let snackBarRef = this.snackBar.open("Bookmark Added");
+        let config = new MatSnackBarConfig;
+        config.duration = 2000;
+        let snackBarRef = this.snackBar.open("Bookmark Added", null, config);
       }, console.error);
+    }else{
+      this.router.navigate(['/login'])
+    }
   }
 
   hide() {
@@ -83,3 +93,4 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isShowProductWebsite = false;
   }
 }
+
