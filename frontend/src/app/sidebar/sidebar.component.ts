@@ -1,4 +1,4 @@
-import { Component, NgZone, OnInit, OnDestroy } from "@angular/core";
+import { Component, NgZone, OnInit, OnDestroy, EventEmitter, Output } from "@angular/core";
 import { Item } from "../models/item.model";
 import { ShareButtons } from "@ngx-share/core";
 import { Meta } from "@angular/platform-browser";
@@ -8,16 +8,20 @@ import { Video } from "../models/video.model";
 import { AuthService } from "../services/auth.service";
 
 import { MatSnackBar } from "@angular/material";
+declare let gtag
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
   styleUrls: ["./sidebar.component.css"]
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   visibility: Boolean = false;
   item: Item;
   video: Video;
   location: Number;
+  isShowProductWebsite: boolean = false;
+
+  @Output() isShowProductWebsiteOutput = new EventEmitter<any>()
   constructor(
     private meta: Meta,
     private bookmarkService: BookmarkService,
@@ -40,6 +44,12 @@ export class SidebarComponent implements OnInit {
       { property: "og:image", content: item.thumbnail }
     ]);
     this.visibility = true;
+  }
+
+  showProductWebsite() {
+    this.isShowProductWebsite = true;
+    this.isShowProductWebsiteOutput.emit(this.isShowProductWebsite)
+
   }
 
   addBookmark() {
@@ -68,5 +78,8 @@ export class SidebarComponent implements OnInit {
 
   hide() {
     this.visibility = false;
+  }
+  ngOnDestroy() {
+    this.isShowProductWebsite = false;
   }
 }

@@ -53,12 +53,19 @@ import { ItemsComponent } from './items/items.component';
 import { ErrorComponent } from './error/error.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SidebarAddTagComponent } from './sidebar-add-tag/sidebar-add-tag.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: "items",
     component: ItemsComponent,
     canActivate: [RestrictService, RoleGuard],
+    resolve: { user: UserResolver }
+  }, 
+  {
+    path: "dashboard",
+    component: DashboardComponent,
+    canActivate: [RestrictService],
     resolve: { user: UserResolver }
   }, 
   {
@@ -106,7 +113,8 @@ const routes: Routes = [
     VideosComponent,
     VideoComponent,
     UnverifiedComponent,
-    SidebarAddTagComponent
+    SidebarAddTagComponent,
+    DashboardComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
