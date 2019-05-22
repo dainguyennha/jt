@@ -7,7 +7,7 @@
     <base href="/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link rel="icon" type="image/x-icon" href="favicon.ico?v=2">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -17,6 +17,33 @@
 
     <script src="./assets/video.js"></script>
     <script src="./assets/videojs-overlay.js"></script>
+    <script>
+        (function (w, d, s, g, js, fjs) {
+            g = w.gapi || (w.gapi = {}); g.analytics = { q: [], ready: function (cb) { this.q.push(cb) } };
+            js = d.createElement(s); fjs = d.getElementsByTagName(s)[0];
+            js.src = 'https://apis.google.com/js/platform.js';
+            fjs.parentNode.insertBefore(js, fjs); js.onload = function () { g.load('analytics') };
+        }(window, document, 'script'));
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-140602899-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+    </script>
+    <script type="text/javascript">
+        function con() {
+            var answer = confirm("do you want to check our other products")
+            if (answer) {
+
+                alert("bye");
+            }
+            else {
+                window.location = "http://www.example.com";
+            }
+        }
+    </script>
 </head>
 
 <body>

@@ -1,6 +1,6 @@
 <div class="video" [hidden]="!vada">
   <h1 class="title" *ngIf="video">{{video.title}}</h1>
-  <div class="content" >
+  <div class="content">
     <div class="video-wrapper" #videoWrapper>
       <div *ngIf="headerDisplay" class="video-header">
         <button><i class="fa fa-share"></i></button>
@@ -12,9 +12,9 @@
         <source *ngIf="video" src="{{video.source}}" type='video/mp4'>
       </video>
       <div *ngIf="isTagDisplay" class="circle" cdkDrag cdkDragBoundary=".video-wrapper"></div>
-      <app-sidebar #sideBarComponent></app-sidebar>
-      <app-sidebar-add-tag (addedRoiItem)="getAddedRoiItem($event)" *ngIf="toggleSideBarAdd" [video]="video" [widthVideo]="widthVideo"
-        [heightVideo]="heightVideo" [time]="time"></app-sidebar-add-tag>
+      <app-sidebar #sideBarComponent (isShowProductWebsiteOutput)="detectClickMore($event)"></app-sidebar>
+      <app-sidebar-add-tag (addedRoiItem)="getAddedRoiItem($event)" *ngIf="toggleSideBarAdd" [video]="video"
+        [widthVideo]="widthVideo" [heightVideo]="heightVideo" [time]="time"></app-sidebar-add-tag>
     </div>
     <div class="rois">
       <mat-list>

@@ -1,8 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "./services/auth.service";
-import { Router } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 import { Location } from "@angular/common";
 import { fadeAnimation } from './transitions';
+import { filter } from 'rxjs/operators';
+
+declare var gtag
 
 @Component({
   selector: "app-root",
@@ -14,8 +17,15 @@ export class AppComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public location: Location,
-    public router: Router
-  ) { }
+    public router: Router,
+  ) {
+    const navEndEvent$ = router.events.pipe(
+      filter(e => e instanceof NavigationEnd)
+    );
+    navEndEvent$.subscribe((e: NavigationEnd) => {
+      gtag('config', 'UA-140602899-1', { 'page_path': e.urlAfterRedirects });
+    });
+  }
 
   ngOnInit() { }
 

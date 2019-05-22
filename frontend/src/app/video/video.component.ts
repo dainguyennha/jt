@@ -17,7 +17,7 @@ import "rxjs/add/operator/filter";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/forkJoin";
 import { SidebarComponent } from "../sidebar/sidebar.component";
-
+declare var gtag
 declare var videojs: any;
 
 @Component({
@@ -26,6 +26,54 @@ declare var videojs: any;
   styleUrls: ["./video.component.css"]
 })
 export class VideoComponent implements OnInit, AfterViewInit {
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event) {
+    if (this.isPlayVideo) {
+      gtag('event', 'video', {
+        'event_category': 'Play Video',
+        'event_label': this.video.id,
+        'event_action': 'plays',
+        'value': 'video-value'
+      });
+      if (this.isShowProductInfor) {
+        gtag('event', 'product infor', {
+          'event_category': 'Get product info in video',
+          'event_label': this.video.id,
+          'event_action': 'get_product_infor',
+          'value': this.selectedItem.title
+        });
+        if (this.isShowProductWebsite) {
+          gtag('event', 'visit_product_website', {
+            'event_category': 'Visit product web',
+            'event_label': this.video.id,
+            'event_action': 'visit_product_website',
+            'value': this.selectedItem.title
+          });
+        } else {
+          gtag('event', 'product infor', {
+            'event_category': 'Get product infor but not visit website',
+            'event_label': this.video.id,
+            'event_action': 'get_product_infor_but_not_visit_website',
+            'value': this.selectedItem.title
+          });
+        }
+      } else {
+        gtag('event', 'video', {
+          'event_category': 'Play but not get product info',
+          'event_label': this.video.id,
+          'event_action': 'play_but_not_get_infor',
+          'value': 'video_value'
+        });
+      }
+    } else {
+      gtag('event', 'load_video', {
+        'event_category': 'Load Video (But not click Play)',
+        'event_label': this.video.id,
+        'event_action': 'load_video_but_not_play',
+        'value': 'load_video_value'
+      });
+    }
+  }
   id;
   t;
   selectedItem;
@@ -42,6 +90,9 @@ export class VideoComponent implements OnInit, AfterViewInit {
   isTagDisplay: boolean = false;
   toggleSelect: boolean = false;
   toggleSideBarAdd: boolean = false;
+  isPlayVideo: boolean = false;
+  isShowProductInfor: boolean = false;
+  isShowProductWebsite: boolean = false;
 
   @ViewChild("videoContainer") videoContainer: ElementRef;
   @ViewChild("sideBarComponent") sideBarComponent: SidebarComponent;
@@ -55,7 +106,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private videoService: VideoService,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   ngOnInit() {
     window.my = window.my || {};
@@ -102,6 +153,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
         });
 
         player.on("play", () => {
+          this.isPlayVideo = true;
           if (this.isPause) {
             this.toggleHeader();
             if (this.isTagDisplay) {
@@ -126,6 +178,51 @@ export class VideoComponent implements OnInit, AfterViewInit {
   ngOnDestroy() {
     window.my.namespace.onShow = null;
     window.my.namespace.onPlay = null;
+    if (this.isPlayVideo) {
+      gtag('event', 'video', {
+        'event_category': 'Play Video',
+        'event_label': this.video.id,
+        'event_action': 'plays',
+        'value': 'video-value'
+      });
+      if (this.isShowProductInfor) {
+        gtag('event', 'product infor', {
+          'event_category': 'Get product info in video',
+          'event_label': this.video.id,
+          'event_action': 'get_product_infor',
+          'value': this.selectedItem.title
+        });
+        if (this.isShowProductWebsite) {
+          gtag('event', 'visit_product_website', {
+            'event_category': 'Visit product web',
+            'event_label': this.video.id,
+            'event_action': 'visit_product_website',
+            'value': this.selectedItem.title
+          });
+        } else {
+          gtag('event', 'product infor', {
+            'event_category': 'Get product infor but not visit website',
+            'event_label': this.video.id,
+            'event_action': 'get_product_infor_but_not_visit_website',
+            'value': this.selectedItem.title
+          });
+        }
+      } else {
+        gtag('event', 'video', {
+          'event_category': 'Play but not get product info',
+          'event_label': this.video.id,
+          'event_action': 'play_but_not_get_infor',
+          'value': 'video_value'
+        });
+      }
+    } else {
+      gtag('event', 'load_video', {
+        'event_category': 'Load Video (But not click Play)',
+        'event_label': this.video.id,
+        'event_action': 'load_video_but_not_play',
+        'value': 'load_video_value'
+      });
+    }
   }
 
   onShow(id) {
@@ -134,6 +231,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
   }
 
   onShowPrivate() {
+    this.isShowProductInfor = true;
     this.videoContainer.nativeElement.pause();
     this.sideBarComponent.show(
       this.selectedItem,
@@ -184,5 +282,8 @@ export class VideoComponent implements OnInit, AfterViewInit {
       let delItemIndex = this.items.findIndex(item => item.id === id)
       this.items.splice(delItemIndex, 1)
     })
+  }
+  detectClickMore(isShowProductWebsite) {
+    this.isShowProductWebsite = isShowProductWebsite
   }
 }
