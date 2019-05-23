@@ -61,7 +61,7 @@ const routes: Routes = [
     resolve: { user: UserResolver }
   }, 
   {
-    path: "dashboard",
+    path: "dashboard/:idvideo",
     component: DashboardComponent,
     canActivate: [RestrictService],
     resolve: { user: UserResolver }

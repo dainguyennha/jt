@@ -1,27 +1,73 @@
 div.videos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
 }
 
 div.videos .duration {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    left: 0px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    display: inline-block;
-    text-align: right;
-    font-weight: 900;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  text-align: right;
+  font-weight: 900;
 }
 
 div.videos mat-card-subtitle {
-    position: relative;
+  position: relative;
 }
 
 @media (max-width: 720px) {
-    div.videos {
-        grid-template-columns: 1fr;
-    }
+  div.videos {
+    grid-template-columns: 1fr;
+  }
+}
+#embed-api-auth-container {
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+#view-selector-container {
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+.chart {
+  border-radius: 10px;
+  margin-bottom: 5rem;
+}
+.chart div {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 0 auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 5px;
+}
+.videos div p {
+  display: block;
+  float: left;
+  line-height: auto;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+}
+.videos div button {
+  float: right;
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+.summary{
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1rem;
+
 }

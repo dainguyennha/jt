@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { browser } from 'protractor';
+import { ActivatedRoute } from '@angular/router';
 declare var gapi;
 declare var google;
 
@@ -10,9 +11,17 @@ declare var google;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route :ActivatedRoute) { }
+
+    
 
   ngOnInit() {
+ var label = "";
+
+  this.route.params.subscribe(params => {
+   label=params["idvideo"]
+  })
+
     gapi.analytics.ready(function () {
 
       /**
@@ -42,24 +51,8 @@ export class DashboardComponent implements OnInit {
        * Clicking on a row in the table will update a second timeline chart with
        * data from the selected browser.
        */
-      var mainChart = new gapi.analytics.googleCharts.DataChart({
-        query: {
-          'dimensions': 'ga:eventLabel',
-          'metrics': 'ga:totalEvents',
-          // 'sort': '-ga:sessions',
-          // 'max-results': '6',
-          'start-date': '30daysAgo',
-          'end-date': 'today',
-          'filters': 'ga:eventCategory==Play Video'
-        },
-        chart: {
-          type: 'TABLE',
-          container: 'main-chart-container',
-          options: {
-            // width: '100%'
-          }
-        }
-      });
+
+
 
 
       /**
@@ -72,13 +65,13 @@ export class DashboardComponent implements OnInit {
           'metrics': 'ga:totalEvents',
           'start-date': '7daysAgo',
           'end-date': 'today',
-          // 'filters':'ga:eventAction==Play'
+          'filters':'ga:eventCategory==Play Video;ga:eventLabel==' + label
         },
         chart: {
           type: 'LINE',
           container: 'plays-chart-container',
           options: {
-            // width: '100%'
+            title: 'Total play video ' + label
           }
         }
       });
@@ -86,65 +79,13 @@ export class DashboardComponent implements OnInit {
 
 
 
-      var osChart = new gapi.analytics.googleCharts.DataChart({
-        query: {
-          'dimensions': 'ga:operatingSystem',
-          'metrics': 'ga:sessions',
-          'start-date': '7daysAgo',
-          'end-date': 'today',
-          // 'filters':'ga:eventAction==Play'
-        },
-        chart: {
-          type: 'PIE',
-          container: 'os-chart-container',
-          options: {
-            title:'Sessions by Operating System',
-            // width: '100%'
-          }
-        }
-      });
 
 
 
 
-      var countryChart = new gapi.analytics.googleCharts.DataChart({
-        query: {
-          'dimensions': 'ga:country',
-          'metrics': 'ga:sessions',
-          'start-date': '7daysAgo',
-          'end-date': 'today',
-          // 'filters':'ga:eventAction==Play'
-        },
-        chart: {
-          type: 'PIE',
-          container: 'country-chart-container',
-          options: {
-            title:'Sessions by Country',
-            // width: '100%'
-          }
-        }
-      });
 
 
 
-
-      var totalPlayGetChart = new gapi.analytics.googleCharts.DataChart({
-        query: {
-          'dimensions': 'ga:eventCategory',
-          'metrics': 'ga:totalEvents',
-          'start-date': '7daysAgo',
-          'end-date': 'today',
-          'filters': 'ga:eventCategory==Play but not get product info,ga:eventCategory==Get product info in video'
-        },
-        chart: {
-          type: 'PIE',
-          container: 'total-playget-chart-container',
-          options: {
-            title: 'Total event Play video and Get product infor '
-            // width: '100%'
-          }
-        }
-      });
 
 
 
@@ -155,13 +96,13 @@ export class DashboardComponent implements OnInit {
           'metrics': 'ga:totalEvents',
           'start-date': '7daysAgo',
           'end-date': 'today',
-          // 'filters':'ga:eventAction==Play'
+          'filters':'ga:eventCategory==Play but not get product info,ga:eventCategory==Get product info in video;ga:eventLabel==' + label
         },
         chart: {
           type: 'PIE',
           container: 'play-getinfo-chart-container',
           options: {
-            // width: '100%'
+            title: 'Play video vs Get product infor ' + label
           }
         }
       });
@@ -175,13 +116,13 @@ export class DashboardComponent implements OnInit {
           'metrics': 'ga:totalEvents',
           'start-date': '7daysAgo',
           'end-date': 'today',
-          // 'filters':'ga:eventAction==Play'
+          'filters':'ga:eventCategory==Play Video,ga:eventCategory==Load Video (But not click Play);ga:eventLabel==' + label
         },
         chart: {
           type: 'PIE',
           container: 'load-play-chart-container',
           options: {
-            // width: '100%'
+            title: 'Load page vs Play video ' + label
           }
         }
       });
@@ -195,19 +136,16 @@ export class DashboardComponent implements OnInit {
           'metrics': 'ga:totalEvents',
           'start-date': '7daysAgo',
           'end-date': 'today',
-          // 'filters':'ga:eventAction==Play'
+          'filters':'ga:eventCategory==Visit product web,ga:eventCategory==Get product infor but not visit website;ga:eventLabel==' + label
         },
         chart: {
           type: 'PIE',
           container: 'getinfor-visit-chart-container',
           options: {
-            // width: '100%'
+            title: 'Get product infor vs Visit product website video ' + label
           }
         }
       });
-
-
-
 
 
 
@@ -231,14 +169,12 @@ export class DashboardComponent implements OnInit {
           google.visualization.events.removeListener(mainChartRowClickListener);
         }
 
-        mainChart.set(options).execute();
-        playVsGetInforChart.set(options);
-        loadVsPlayChart.set(options);
-        GetInforVsVisitWebsiteChart.set(options);
-        playsChart.set(options);
-        osChart.set(options).execute();
-        countryChart.set(options).execute();
-        totalPlayGetChart.set(options).execute()
+        // mainChart.set(options).execute();
+        playVsGetInforChart.set(options).execute();
+        loadVsPlayChart.set(options).execute();
+        GetInforVsVisitWebsiteChart.set(options).execute();
+        playsChart.set(options).execute();
+
 
 
         // Only render the breakdown chart if a browser filter has been set.
@@ -248,82 +184,6 @@ export class DashboardComponent implements OnInit {
         if (playsChart.get().query.filters) playsChart.execute();
 
 
-      });
-
-
-      /**
-       * Each time the main chart is rendered, add an event listener to it so
-       * that when the user clicks on a row, the line chart is updated with
-       * the data from the browser in the clicked row.
-       */
-      mainChart.on('success', function (response) {
-
-        var chart = response.chart;
-        var dataTable = response.dataTable;
-
-        // Store a reference to this listener so it can be cleaned up later.
-        mainChartRowClickListener = google.visualization.events
-          .addListener(chart, 'select', function (event) {
-
-            // When you unselect a row, the "select" event still fires
-            // but the selection is empty. Ignore that case.
-            if (!chart.getSelection().length) return;
-
-            var row = chart.getSelection()[0].row;
-            var label = dataTable.getValue(row, 0);
-            var optionPLayGetinfo = {
-              query: {
-                filters: 'ga:eventCategory==Play but not get product info,ga:eventCategory==Get product info in video;ga:eventLabel==' + label
-              },
-              chart: {
-                options: {
-                  title: 'Play video vs Get product infor ' + label
-                }
-              }
-            };
-
-
-            var optionLoadPlay = {
-              query: {
-                filters: 'ga:eventCategory==Play Video,ga:eventCategory==Load Video (But not click Play);ga:eventLabel==' + label
-              },
-              chart: {
-                options: {
-                  title: 'Load page vs Play video ' + label
-                }
-              }
-            };
-
-
-            var optionInforVisit = {
-              query: {
-                filters: 'ga:eventCategory==Visit product web,ga:eventCategory==Get product infor but not visit website;ga:eventLabel==' + label
-              },
-              chart: {
-                options: {
-                  title: 'Get product infor vs Visit product website video ' + label
-                }
-              }
-            };
-
-
-            var optionPlays = {
-              query: {
-                filters: 'ga:eventCategory==Play Video;ga:eventLabel==' + label
-              },
-              chart: {
-                options: {
-                  title: 'Total play video ' + label
-                }
-              }
-            };
-
-
-            playVsGetInforChart.set(optionPLayGetinfo).execute();
-            loadVsPlayChart.set(optionLoadPlay).execute();
-            GetInforVsVisitWebsiteChart.set(optionInforVisit).execute();
-            playsChart.set(optionPlays).execute();
-          });
       });
 
     });
