@@ -40,11 +40,11 @@ export class SidebarAddTagComponent implements OnInit {
   addBookmark() {
     let coordinatesArr = window.getComputedStyle(document.querySelector(".circle")).getPropertyValue("transform").match(/-?[\d\.]+/g)
     // console.log(coordinatesArr)
-    if(coordinatesArr){
+    if (coordinatesArr) {
 
       this.relativeTagX = ((this.widthVideo / 2) + parseFloat(coordinatesArr[4])) / this.widthVideo
       this.relativeTagY = ((this.heightVideo / 2) + parseFloat(coordinatesArr[5])) / this.heightVideo
-    }else{
+    } else {
       this.relativeTagX = 0.5;
       this.relativeTagY = 0.5;
     }
@@ -84,6 +84,9 @@ export class SidebarAddTagComponent implements OnInit {
 
     if (this.authService.isAuthenticated()) {
       this.videoService.addRoiItem(formRoiItem).subscribe(res => {
+        let config = new MatSnackBarConfig;
+        config.duration = 2000;
+        let snackBarRef = this.snackBar.open("Bookmark Added", null, config);
         this.addedRoiItem.emit(res);
         this.bookmarkService
           .addBookmark(
@@ -104,9 +107,7 @@ export class SidebarAddTagComponent implements OnInit {
             )
           )
           .subscribe(res => {
-            let config = new MatSnackBarConfig;
-            config.duration = 2000;
-            let snackBarRef = this.snackBar.open("Bookmark Added", null, config);
+
             this.showAddSideBar = false;
           }, console.error);
       }, console.error);

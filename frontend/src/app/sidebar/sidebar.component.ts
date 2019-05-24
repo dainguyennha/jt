@@ -29,7 +29,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     public share: ShareButtons,
     public snackBar: MatSnackBar,
-    private router:Router
+    private router: Router
   ) { }
 
   ngOnInit() { }
@@ -58,32 +58,33 @@ export class SidebarComponent implements OnInit, OnDestroy {
   addBookmark() {
     this.hide()
 
-    if(this.authService.isAuthenticated()){
+    if (this.authService.isAuthenticated()) {
+      let config = new MatSnackBarConfig;
+      config.duration = 2000;
+      let snackBarRef = this.snackBar.open("Bookmark Added", null, config);
 
-    this.bookmarkService
-      .addBookmark(
-        new Bookmark(
-          '',
-          {
-            id: this.video.id,
-            title: this.video.title
-          },
-          {
-            id: this.item.id,
-            title: this.item.title
-          },
-          this.location,
-          AuthService.user.id,
-          new Date(),
-          null
+      this.bookmarkService
+        .addBookmark(
+          new Bookmark(
+            '',
+            {
+              id: this.video.id,
+              title: this.video.title
+            },
+            {
+              id: this.item.id,
+              title: this.item.title
+            },
+            this.location,
+            AuthService.user.id,
+            new Date(),
+            null
+          )
         )
-      )
-      .subscribe(res => {
-        let config = new MatSnackBarConfig;
-        config.duration = 2000;
-        let snackBarRef = this.snackBar.open("Bookmark Added", null, config);
-      }, console.error);
-    }else{
+        .subscribe(res => {
+
+        }, console.error);
+    } else {
       this.router.navigate(['/login'])
     }
   }

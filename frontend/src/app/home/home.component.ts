@@ -1,11 +1,12 @@
 import { Component, OnInit, NgZone, ViewChild, ElementRef, HostListener } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { VideoService } from "../services/video.service";
 import { Observable } from "rxjs";
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { Video } from "../models/video.model";
 import { ROI } from "../models/roi.model";
 import { Item } from "../models/item.model";
+import { AuthService } from "../services/auth.service";
 declare var videojs: any;
 
 @Component({
@@ -47,7 +48,9 @@ export class HomeComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private videoService: VideoService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private router: Router,
+    private authService:AuthService
     ) { }
 
   ngOnInit() {
@@ -154,7 +157,11 @@ export class HomeComponent implements OnInit{
   }
 
   showSideBarAdd() {
-    this.toggleSideBarAdd = !this.toggleSideBarAdd;
+    if(this.authService.isAuthenticated()){
+      this.toggleSideBarAdd = !this.toggleSideBarAdd;
+    }else{
+      this.router.navigate(['/login'])
+    }
   }
 
 }
