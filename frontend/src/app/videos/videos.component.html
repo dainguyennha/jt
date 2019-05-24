@@ -9,7 +9,7 @@
 <div hidden="True" id="view-selector-container"></div>
 <div class="chart-wrapper">
     <div class="summary">Summary stats for all videos</div>
-    <div class="chart" style="display: grid;grid-template-columns: 1fr 1fr 1fr;">
+    <div class="chart">
 
         <div id="os-chart-container"></div>
         <div id="country-chart-container"></div>
@@ -31,12 +31,10 @@
                 <!-- <button mat-button>Key stats,traffic chart</button> -->
             </div>
         </mat-card-content>
-        <mat-card-content>
-            <h4>Video Description</h4>
-        </mat-card-content>
+
         <mat-card-content class="mat-track">
             <div class="track">
-                <h4>Key stats, traffic chart</h4>
+                <h4>Video Description</h4>
             </div>
             <button mat-button  routerLink="/dashboard/{{video.id}}" class="btn-show-stats">Show stats</button>
         </mat-card-content>
