@@ -205,7 +205,7 @@ def bookmark(id=None):
         s3.upload_file(Key,bucketName,outPutname, ExtraArgs={'ACL':'public-read'})
                 
         mongo.db.bookmarks.insert({
-            'id':request.form['video-id']+"-"+request.form['item-id']+"-"+request.form['user'],
+            'id':request.form['video-id']+"-"+request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'],
             'video': {'id': request.form['video-id'],
                       'title': request.form['video-title']},
             'item': {'id': request.form['item-id'],
