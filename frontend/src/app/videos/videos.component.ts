@@ -73,7 +73,7 @@ export class VideosComponent implements OnInit {
           container: 'os-chart-container',
           options: {
             title:'Sessions by Operating System',
-            // width: '100%'
+            width: 350
           }
         }
       });
@@ -92,7 +92,7 @@ export class VideosComponent implements OnInit {
           container: 'country-chart-container',
           options: {
             title:'Sessions by Country',
-            // width: '100%'
+            width: 350
           }
         }
       });
@@ -110,8 +110,8 @@ export class VideosComponent implements OnInit {
           type: 'PIE',
           container: 'total-playget-chart-container',
           options: {
-            title: 'Total event Play video and Get product infor '
-            // width: '100%'
+            title: 'Total event Play video and Get product infor ',
+            width: 350
           }
         }
       });

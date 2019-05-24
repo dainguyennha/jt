@@ -56,6 +56,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
 
   addBookmark() {
+    this.hide()
+
     if(this.authService.isAuthenticated()){
 
     this.bookmarkService
