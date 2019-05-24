@@ -39,7 +39,7 @@ export class BookmarksComponent implements OnInit, OnChanges {
   }
 
   delete_bookmark(data) {
-    this.bookmarkService.deleteBookmark(data.video.id + "-" + data.item.id + "-" + this.authService.getUser().id)
+    this.bookmarkService.deleteBookmark(data.video.id + "-" + data.item.id + "-" + this.authService.getUser().id+"-"+data.location)
       .subscribe(del => {
         let index = this.bookmarks.findIndex(bm => bm.id === del)
         this.bookmarks.splice(index, 1)
