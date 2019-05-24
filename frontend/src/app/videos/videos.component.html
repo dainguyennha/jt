@@ -1,11 +1,22 @@
-<div id="embed-api-auth-container"></div>
-<div hidden="True" id="view-selector-container"></div>
-<div class="summary">Summary stats for all videos</div>
-<div class="chart" style="display: grid;grid-template-columns: 1fr 1fr;">
-    <div id="os-chart-container"></div>
-    <div id="country-chart-container"></div>
-    <div id="total-playget-chart-container"></div>
+<div class="videos-wrapper">
+
+<input type="text" placeholder="Search by name, description, ect.">
+<div class="btn-name-uploaded-date">
+    <button mat-button>Name</button>
+    <button mat-button>Uploaded Date</button>
 </div>
+<div hidden="True" id="embed-api-auth-container"></div>
+<div hidden="True" id="view-selector-container"></div>
+<div class="chart-wrapper">
+    <div class="summary">Summary stats for all videos</div>
+    <div class="chart" style="display: grid;grid-template-columns: 1fr 1fr 1fr;">
+
+        <div id="os-chart-container"></div>
+        <div id="country-chart-container"></div>
+        <div id="total-playget-chart-container"></div>
+    </div>
+</div>
+
 <div class="videos">
     <mat-card class="example-card" *ngFor="let video of videos" class="mat-elevation-z5">
         <mat-card-content>
@@ -17,8 +28,17 @@
             </a>
             <div>
                 <p>{{video.author}}</p>
-                <button mat-button routerLink="/dashboard/{{video.id}}">Key stats,traffic chart</button>
+                <!-- <button mat-button>Key stats,traffic chart</button> -->
             </div>
+        </mat-card-content>
+        <mat-card-content>
+            <h4>Video Description</h4>
+        </mat-card-content>
+        <mat-card-content class="mat-track">
+            <div class="track">
+                <h4>Key stats, traffic chart</h4>
+            </div>
+            <button mat-button  routerLink="/dashboard/{{video.id}}" class="btn-show-stats">Show stats</button>
         </mat-card-content>
     </mat-card>
 </div>

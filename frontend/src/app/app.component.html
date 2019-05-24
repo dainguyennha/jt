@@ -2,7 +2,7 @@
   <button mat-button routerLink="/">Home</button>
   <button mat-button *ngIf="authService.getUser()&&authService.isAuthenticated()"
     routerLink="/bookmarks">Bookmarks</button>
-  <button mat-button routerLink="/videos">Videos</button>
+  <button mat-button routerLink="/videos" *ngIf="authService.getUser()&&authService.isAuthenticated()">Videos</button>
 
   <button mat-button *ngIf="authService.getUser()&&authService.isAuthenticated()&&authService.getUser().role=='admin'" routerLink="/items">Items</button>
 

@@ -194,12 +194,12 @@ def bookmark(id=None):
 
         ff = ffmpy.FFmpeg(
           inputs= {video_url: None},
-          outputs= {"./assets/images/{}.png".format(request.form['item-id']): "-ss {} -vframes 1".format(humanize_time(float(request.form['location'])))})
+          outputs= {"./assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location']): "-ss {} -vframes 1".format(humanize_time(float(request.form['location'])))})
         ff.run()
 
         bucketName = "jt-test-bkai"
-        Key = "./assets/images/{}.png".format(request.form['item-id'])
-        outPutname = "{}.png".format(request.form['item-id'])
+        Key = "./assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
+        outPutname = "{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
 
         s3 = boto3.client('s3')
         s3.upload_file(Key,bucketName,outPutname, ExtraArgs={'ACL':'public-read'})
@@ -225,7 +225,7 @@ def bookmark(id=None):
                 'item': bookmark['item'],
                 'location': bookmark['location'],
                 'created': bookmark['created'],
-                'thumbnail': 'https://s3-ap-southeast-1.amazonaws.com/jt-test-bkai' +'/'+bookmark['item']['id']+'.png'
+                'thumbnail': 'https://s3-ap-southeast-1.amazonaws.com/jt-test-bkai' +'/'+bookmark['item']['id']+"-"+id+"-"+bookmark['location']+'.png'
             })
         return json_util.dumps(processed, ensure_ascii=False).encode('utf8')
 
