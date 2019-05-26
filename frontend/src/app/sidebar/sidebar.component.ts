@@ -51,7 +51,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
   showProductWebsite() {
     this.isShowProductWebsite = true;
     this.isShowProductWebsiteOutput.emit(this.isShowProductWebsite)
-
+    if (this.item.moreUrl == "") {
+      this.router.navigate(["/post/" + this.item.id])
+    } else {
+      location.href = this.item.moreUrl;
+    }
   }
 
   addBookmark() {
@@ -73,8 +77,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
             {
               id: this.item.id,
               title: this.item.title,
-              descriptrion:this.item.description,
-              subtitle:null
+              descriptrion: this.item.description,
+              subtitle: null
             },
             this.location,
             AuthService.user.id,
