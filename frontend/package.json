@@ -34,6 +34,7 @@
     "angular-font-awesome": "^3.1.2",
     "angularfire2": "^5.0.0-rc.10",
     "auth0-web": "^1.7.0",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "firebase": "^5.0.4",
     "font-awesome": "^4.7.0",

@@ -5,7 +5,7 @@
   background-color: rgba(50, 50, 50, 0.5);
   color: white;
   z-index: 2147483647;
-  width: 32%;
+  width: 34%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -27,9 +27,9 @@ div.action-row {
   justify-content: space-around;
 }
 div.social-row {
-  margin-top: 30px;
+  margin-top: 25px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 15px;
   align-items: center;
   justify-content: space-around;
@@ -51,7 +51,6 @@ div.social-row > div > i {
 }
 @media (max-width: 650px) {
   div.action-row {
-    /* grid-template-columns: 1fr; */
     margin-top: 9px;
   }
   div.social-row{
@@ -75,4 +74,8 @@ div.social-row > div > i {
   button{
     font-size: .8rem
   }
+}
+.mat-raised-button{
+  min-width: 0;
+  padding: 0 9px;
 }

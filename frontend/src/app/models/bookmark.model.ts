@@ -8,6 +8,8 @@ export class Bookmark {
     public item: {
       id: string;
       title: string;
+      descriptrion:string;
+      subtitle:string;
     },
     public location: Number,
     public user: string,

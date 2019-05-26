@@ -1,0 +1,50 @@
+<div class="item-bookmark" *ngIf="item">
+    <div class="header-item">
+        <div class="title-item">
+            {{item.title}}
+        </div>
+        <div class="tool">
+            <a href="#"><i class="fas fa-share-alt"></i></a>
+        </div>
+    </div>
+    <div class="content-item">
+        <div class="img-item">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators"
+                        *ngFor="let thumbnail_url of thumbnail_urls; let i=index" attr.data-slide-to="{{i}}"></li>
+
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://s3-ap-southeast-1.amazonaws.com/jt-test-bkai/{{thumbnail_urls[0]['thumbnail']}}.png"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div>
+                        <div class="carousel-item " *ngFor="let thumbnail_url of thumbnail_urls ; let i = index">
+                            <img src="https://s3-ap-southeast-1.amazonaws.com/jt-test-bkai/{{thumbnail_url['thumbnail']}}.png"
+                                class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+        </div>
+        <div class="description-item">
+            {{item.description}}
+        </div>
+
+    </div>
+</div>
+<div id="disqus_thread"></div>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+        Disqus.</a></noscript>

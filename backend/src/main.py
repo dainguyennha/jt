@@ -62,6 +62,40 @@ def get_rois(id):
             })
     return json_util.dumps(processed, ensure_ascii=False).encode('utf8')
 
+@app.route('/item/<string:id>', methods=['GET'])
+def get_item_user(id):
+    object_results = list(mongo.db.objects.find(
+        {"object_id": {"$in": [id]}}))
+
+    product_results = list(mongo.db.products.find(
+        {"product_id": {"$in": [id]}}))
+        
+    bookmarks = list(mongo.db.bookmarks.find({"item.id":id}))
+    thumbnails=[]
+    for bookmark in bookmarks:
+        thumbnails.append(
+            {'thumbnail':id+"-"+bookmark['user']+"-"+bookmark['location']}
+        )
+
+    if len(object_results):
+        for result in object_results:
+            item={
+                'title':result['object_name'],
+                'description':result['object_short_desc'],
+                'thumbnail':thumbnails
+            }
+            return json_util.dumps(item, ensure_ascii=False).encode('utf8')
+
+    if len(product_results):
+        for result1 in product_results:
+
+            item1={
+            'title':result1['product_name'],
+            'description':result1['product_short_desc'],
+            'thumbnail':thumbnails
+            }
+            return json_util.dumps(item1, ensure_ascii=False).encode('utf8')
+
 @app.route('/items/<string:id>', methods=['GET'])
 def get_items(id):
     products = set()
@@ -106,7 +140,9 @@ def add_item_roi():
         'object_subtitle':request.form['item_subtitle'],
         'object_name':request.form['item_title'],
         'object_short_desc':request.form['item_des'],
-        'object_more_url':request.form['item_more_url']
+        'object_more_url':request.form['item_more_url'],
+        'thumbnail':request.form['item_id']+"-"+request.form['user_id']+"-"+request.form['time']
+
     })
     mongo.db.rois.insert({
         'object_id':request.form['item_id'],
@@ -209,7 +245,8 @@ def bookmark(id=None):
             'video': {'id': request.form['video-id'],
                       'title': request.form['video-title']},
             'item': {'id': request.form['item-id'],
-                     'title': request.form['item-title']},
+                     'title': request.form['item-title'],
+                     'description':request.form['item-description']},
             'location': request.form['location'],
             'user': request.form['user'],
             'created': request.form['created']
