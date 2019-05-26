@@ -38,6 +38,8 @@ export class BookmarkService {
     formData.append("video-title", bookmark.video.title);
     formData.append("item-id", bookmark.item.id);
     formData.append("item-title", bookmark.item.title);
+    formData.append("item-description", bookmark.item.descriptrion);
+
     formData.append("user", bookmark.user);
     formData.append("location", bookmark.location.toString());
     formData.append("created", bookmark.created.toLocaleString());

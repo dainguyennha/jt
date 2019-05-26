@@ -1,0 +1,26 @@
+.item-bookmark{
+    width: 96%;
+    background: crimson;
+    padding: 2%;
+    border-radius: 8px;
+    color: white;
+}
+.header-item{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+.content-item{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+.description-item{
+    margin: 2%
+}
+.tool{
+    text-align: right;
+    font-size: 1.3rem;
+}
+.title-item{
+    font-size: 1.4rem;
+    margin-bottom: 17px;
+}

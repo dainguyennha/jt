@@ -6,6 +6,7 @@ import {
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/catch";
 import { environment } from '../../environments/environment';
+import { Item } from "../models/item.model";
 
 @Injectable()
 export class VideoService {
@@ -48,5 +49,9 @@ export class VideoService {
     return this.http
       .get(`${environment.apiURL}/items/` + id)
       .catch(VideoService._handleError);
+  }
+
+  getItem(id):Observable<any>{
+    return this.http.get(`${environment.apiURL}/item/` + id)
   }
 }

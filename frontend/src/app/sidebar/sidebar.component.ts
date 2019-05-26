@@ -54,7 +54,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   }
 
-
   addBookmark() {
     this.hide()
 
@@ -73,7 +72,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
             },
             {
               id: this.item.id,
-              title: this.item.title
+              title: this.item.title,
+              descriptrion:this.item.description,
+              subtitle:null
             },
             this.location,
             AuthService.user.id,

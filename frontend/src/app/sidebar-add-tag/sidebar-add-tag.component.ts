@@ -39,7 +39,6 @@ export class SidebarAddTagComponent implements OnInit {
 
   addBookmark() {
     let coordinatesArr = window.getComputedStyle(document.querySelector(".circle")).getPropertyValue("transform").match(/-?[\d\.]+/g)
-    // console.log(coordinatesArr)
     if (coordinatesArr) {
 
       this.relativeTagX = ((this.widthVideo / 2) + parseFloat(coordinatesArr[4])) / this.widthVideo
@@ -75,6 +74,10 @@ export class SidebarAddTagComponent implements OnInit {
     formRoiItem.append("item_des", item.description)
     formRoiItem.append("item_subtitle", item.subtitle)
     formRoiItem.append("item_more_url", item.moreUrl)
+    formRoiItem.append("user_id", AuthService.user.id)
+    formRoiItem.append("time", this.time)
+    
+
 
     formRoiItem.append("roi-data-ix", roi.data.ix)
     formRoiItem.append("roi-data-iy", roi.data.iy)
@@ -98,7 +101,9 @@ export class SidebarAddTagComponent implements OnInit {
               },
               {
                 id: item.id,
-                title: item.title
+                title: item.title,
+                descriptrion:item.description,
+                subtitle:null
               },
               this.time,
               AuthService.user.id,
