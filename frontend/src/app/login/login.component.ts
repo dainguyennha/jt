@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   ]);
   passwordFormControl = new FormControl("", [Validators.required]);
   errorStateMatcher = new CustomErrorStateMatcher();
-
   errorMessage: string = "";
 
   constructor(

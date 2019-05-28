@@ -6,7 +6,6 @@ import { BookmarkService } from "../services/bookmark.service";
 import { Bookmark } from "../models/bookmark.model";
 import { Video } from "../models/video.model";
 import { AuthService } from "../services/auth.service";
-
 import { MatSnackBar, MatSnackBarConfig } from "@angular/material";
 import { Router } from "@angular/router";
 declare let gtag

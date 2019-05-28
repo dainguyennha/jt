@@ -2,7 +2,7 @@
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from .auth import AuthError, requires_auth
+from auth import AuthError, requires_auth
 from flask_pymongo import PyMongo
 from bson import json_util
 from environs import Env
@@ -220,25 +220,47 @@ def get_videos():
 # @requires_auth
 def bookmark(id=None):
     if request.method == 'POST':
+        # video = mongo.db.videos.find_one_or_404({'video_id': request.form['video-id']})
+        # video_url = app.config['CDN_ROOT']+'/video/'+video['user_id']+'/'+video['video_id']+'/'+video['video_id']+'.mp4'
+        
+        # def humanize_time(secs):
+        #   mins, secs = divmod(secs, 60)
+        #   hours, mins = divmod(mins, 60)
+        #   return '%02d:%02d:%d' % (hours, mins, secs)
+
+        # ff = ffmpy.FFmpeg(
+        #   inputs= {video_url: None},
+        #   outputs= {"./assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location']): "-ss {} -vframes 1".format(humanize_time(float(request.form['location'])))})
+        # ff.run()
+
+        # bucketName = "jt-test-bkai"
+        # Key = "./assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
+        # outPutname = "{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
+
+        # s3 = boto3.client('s3')
+        # s3.upload_file(Key,bucketName,outPutname, ExtraArgs={'ACL':'public-read'})
+        #import pdb 
+       #pdb.set_trace()
         video = mongo.db.videos.find_one_or_404({'video_id': request.form['video-id']})
         video_url = app.config['CDN_ROOT']+'/video/'+video['user_id']+'/'+video['video_id']+'/'+video['video_id']+'.mp4'
-        
+
         def humanize_time(secs):
           mins, secs = divmod(secs, 60)
           hours, mins = divmod(mins, 60)
           return '%02d:%02d:%d' % (hours, mins, secs)
 
         ff = ffmpy.FFmpeg(
+          executable='/usr/bin/ffmpeg',
           inputs= {video_url: None},
-          outputs= {"./assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location']): "-ss {} -vframes 1".format(humanize_time(float(request.form['location'])))})
+          outputs= {"../assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location']): "-ss {} -vframes 1".format(humanize_time(float(request.form['location'])))})
         ff.run()
-
         bucketName = "jt-test-bkai"
-        Key = "./assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
+        Key = "../assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
         outPutname = "{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
 
         s3 = boto3.client('s3')
         s3.upload_file(Key,bucketName,outPutname, ExtraArgs={'ACL':'public-read'})
+
                 
         mongo.db.bookmarks.insert({
             'id':request.form['video-id']+"-"+request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'],

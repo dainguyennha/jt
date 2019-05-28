@@ -19,15 +19,13 @@ div.videos .duration {
 div.videos mat-card-subtitle {
   position: relative;
 }
-
-@media (max-width: 720px) {
-  div.videos {
-    grid-template-columns: 1fr;
-  }
-  .chart{
-    grid-template-columns: 1fr;
-  }
+.chart {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
 }
+
+
 #embed-api-auth-container {
   text-align: center;
   margin-bottom: 10px;
@@ -38,12 +36,7 @@ div.videos mat-card-subtitle {
   margin-bottom: 10px;
   border-radius: 10px;
 }
-.chart {
-  /* margin-bottom: 5rem; */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  
-}
+
 .chart div {
   background: white;
   border-radius: 10px;
@@ -89,7 +82,6 @@ mat-card-content h4{
 }
 mat-card-content{
   display: block;
-    /* margin-bottom: 16px; */
     background: #9AA5B1;
     margin: 0 5%;
     text-align: center;
@@ -109,8 +101,6 @@ mat-card-content:first-child:hover{
 }
 .track{
   display: block;
-    /* width: 100%; */
-    /* height: 100%; */
     text-decoration: none;
     color: black;
     height: 77%;
@@ -165,4 +155,16 @@ input:focus{
     border-radius: 8px;
     float: right;
     margin-right: 2%;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .chart{
+    grid-template-columns: 1fr;
+  }
+  mat-card{
+    display: grid;
+    grid-template-columns: 1fr;
+    
+  }
 }

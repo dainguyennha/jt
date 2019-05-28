@@ -2,18 +2,14 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from "@angular/router";
-
 import { AppComponent } from "./app.component";
-
 import { RedirectService } from "./services/redirect.service";
 import { RestrictService } from "./services/restrict.service";
 import { RoleGuard } from "./guards/role.guard";
-
 import { BookmarkService } from "./services/bookmark.service";
 import { VideoService } from "./services/video.service";
 import { VideosComponent } from "./videos/videos.component";
 import { VideoComponent } from "./video/video.component";
-
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NoopAnimationsModule, BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
@@ -58,7 +54,7 @@ const routes: Routes = [
   {
     path: "post/:itemid",
     component: PostComponent,
-    // canActivate: [RestrictService, RoleGuard],
+    canActivate: [RestrictService],
     resolve: { user: UserResolver }
   },
   {
@@ -91,11 +87,13 @@ const routes: Routes = [
   {
     path: "videos",
     component: VideosComponent,
+    canActivate: [RestrictService],
     resolve: { user: UserResolver }
   },
   {
     path: "video/:id",
     component: VideoComponent,
+    canActivate: [RestrictService],
     resolve: { user: UserResolver }
   },
   {

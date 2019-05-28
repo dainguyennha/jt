@@ -13,8 +13,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private route :ActivatedRoute) { }
 
-    
-
   ngOnInit() {
  var label = "";
 
@@ -34,7 +32,6 @@ export class DashboardComponent implements OnInit {
         clientid: '733840601926-vscu36kq5kvj17dsuiignkcvo4rb64qu.apps.googleusercontent.com'
       });
 
-
       /**
        * Create a new ViewSelector instance to be rendered inside of an
        * element with the id "view-selector-container".
@@ -45,15 +42,6 @@ export class DashboardComponent implements OnInit {
 
       // Render the view selector to the page.
       viewSelector.execute();
-
-      /**
-       * Create a table chart showing top browsers for users to interact with.
-       * Clicking on a row in the table will update a second timeline chart with
-       * data from the selected browser.
-       */
-
-
-
 
       /**
        * Create a timeline chart showing sessions over time for the browser the
