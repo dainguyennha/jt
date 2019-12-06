@@ -2,7 +2,7 @@
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from auth import AuthError, requires_auth
+from .auth import AuthError, requires_auth
 from flask_pymongo import PyMongo
 from bson import json_util
 from environs import Env
@@ -252,10 +252,10 @@ def bookmark(id=None):
         ff = ffmpy.FFmpeg(
           executable='/usr/bin/ffmpeg',
           inputs= {video_url: None},
-          outputs= {"../assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location']): "-ss {} -vframes 1".format(humanize_time(float(request.form['location'])))})
+          outputs= {"./assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location']): "-ss {} -vframes 1".format(humanize_time(float(request.form['location'])))})
         ff.run()
         bucketName = "jt-test-bkai"
-        Key = "../assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
+        Key = "./assets/images/{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
         outPutname = "{}.png".format(request.form['item-id']+"-"+request.form['user']+"-"+request.form['location'])
 
         s3 = boto3.client('s3')
